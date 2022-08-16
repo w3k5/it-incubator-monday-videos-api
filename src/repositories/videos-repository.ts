@@ -48,9 +48,6 @@ export const videosRepository = {
 
 		Object.assign(candidate, data);
 
-		if (!data.publicationDate) {
-			console.log('DATE', candidate.createdAt);
-		}
 		return true;
 	},
 
