@@ -1,3 +1,3 @@
-import {VideoInterface} from "@interfaces";
+import { VideoInterface } from '@interfaces';
 
-export type CreateVideoType = Pick<VideoInterface, 'title' | 'author' | 'availableResolutions'>
+export type CreateVideoType = Pick<VideoInterface, 'title' | 'author' | 'availableResolutions'>;

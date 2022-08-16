@@ -1,5 +1,5 @@
-import { Router } from "express";
-import { createVideo, getAllVideos, getVideoById, removeVideoById, updateVideoById } from "./handlers";
+import { Router } from 'express';
+import { createVideo, getAllVideos, getVideoById, removeVideoById, updateVideoById } from './handlers';
 
 export const videosRouter = Router();
 
