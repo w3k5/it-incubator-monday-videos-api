@@ -1,6 +1,7 @@
 import { NextFunction, Request, Response } from 'express';
 import { validationResult } from 'express-validator';
 import { generateError } from '../services/error-generator';
+import { HttpStatusesEnum } from '../enums';
 
 export const inputValidationMiddleware = (
 	request: Request,
@@ -12,7 +13,7 @@ export const inputValidationMiddleware = (
 		const preparedErrors = {
 			errorMessages: errors.array().map(generateError),
 		};
-		return response.status(400).send(preparedErrors);
+		return response.status(HttpStatusesEnum.BAD_REQUEST).send(preparedErrors);
 	}
 
 	next();

@@ -5,12 +5,11 @@ import { config } from 'dotenv';
 import { videosRouter } from './routes/videos/videos-router';
 
 config();
-const app = express();
+export const app = express();
 const port = process.env.PORT || 3000;
 
 app.use(cors());
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use('/api/videos', videosRouter);
 

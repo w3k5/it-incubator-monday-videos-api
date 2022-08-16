@@ -10,7 +10,7 @@ import { validationResult } from 'express-validator';
  */
 export const getAllVideos = (request: Request, response: Response) => {
 	const videos = videosRepository.findVideos();
-	return response.send(videos);
+	return response.status(HttpStatusesEnum.OK).send(videos);
 };
 
 /**
@@ -20,7 +20,7 @@ export const getAllVideos = (request: Request, response: Response) => {
  */
 export const createVideo = (request: Request, response: Response) => {
 	const newVideo = videosRepository.createVideo(request.body);
-	return response.send(newVideo);
+	return response.status(HttpStatusesEnum.CREATED).send(newVideo);
 };
 
 /**
@@ -32,9 +32,9 @@ export const getVideoById = (request: Request, response: Response) => {
 	const id = +request.params.id;
 	const candidate = videosRepository.findVideoById(id);
 	if (candidate) {
-		return response.send(candidate);
+		return response.status(HttpStatusesEnum.OK).send(candidate);
 	} else {
-		return response.status(404).send();
+		return response.status(HttpStatusesEnum.NOT_FOUND).send();
 	}
 };
 
@@ -68,5 +68,15 @@ export const removeVideoById = (request: Request, response: Response) => {
 
 	videosRepository.removeVideoById(id);
 
+	return response.status(HttpStatusesEnum.NO_CONTENT).send();
+};
+
+/**
+ * Drops full database
+ * @param request
+ * @param response
+ */
+export const dropDatabase = (request: Request, response: Response) => {
+	videosRepository.dropDatabase();
 	return response.status(HttpStatusesEnum.NO_CONTENT).send();
 };

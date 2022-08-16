@@ -4,7 +4,7 @@ import { CreateVideoType } from '../types/create-video.type';
 export const videoGenerator = ({
 	title,
 	author,
-	availableResolutions,
+	availableResolutions = [],
 }: CreateVideoType): VideoInterface => {
 	const date = new Date().toISOString();
 	const publicationDate = getDefaultPublicationDate(date);

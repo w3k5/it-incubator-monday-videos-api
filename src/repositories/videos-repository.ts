@@ -58,4 +58,12 @@ export const videosRepository = {
 		const candidateIndex = MOCK_VIDEOS.findIndex((video) => video.id === id);
 		MOCK_VIDEOS.splice(candidateIndex, 1);
 	},
+
+	/**
+	 * Drops full database
+	 */
+	dropDatabase() {
+		MOCK_VIDEOS.splice(0, MOCK_VIDEOS.length);
+		return MOCK_VIDEOS;
+	},
 };
