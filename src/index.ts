@@ -1,9 +1,10 @@
 import express from 'express';
 import cors from 'cors';
 import bodyParser from 'body-parser';
+import { config } from 'dotenv';
 import { videosRouter } from './routes/videos/videos-router';
 
-require('dotenv').config();
+config();
 const app = express();
 const port = process.env.PORT || 3000;
 

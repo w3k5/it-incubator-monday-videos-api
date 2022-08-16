@@ -1,5 +1,13 @@
 import { Router } from 'express';
-import { createVideo, getAllVideos, getVideoById, removeVideoById, updateVideoById } from './handlers';
+import {
+	createVideo,
+	getAllVideos,
+	getVideoById,
+	removeVideoById,
+	updateVideoById,
+} from './handlers';
+import { createVideoValidations } from '../../validators/video-validators/methods-validators/create-video-validations';
+import { updateVideoValidation } from '../../validators/video-validators/methods-validators/update-video-validations';
 
 export const videosRouter = Router();
 
@@ -11,7 +19,7 @@ videosRouter.get('/', getAllVideos);
 /**
  * Creates new video
  */
-videosRouter.post('/', createVideo);
+videosRouter.post('/', createVideoValidations, createVideo);
 
 /**
  * Returns one video by ID
@@ -21,7 +29,7 @@ videosRouter.get('/:id', getVideoById);
 /**
  * Updates one video by ID
  */
-videosRouter.put('/:id', updateVideoById);
+videosRouter.put('/:id', updateVideoValidation, updateVideoById);
 
 /**
  * Removes one video by ID

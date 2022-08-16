@@ -6,5 +6,5 @@
     "ts": "node -r ts-node/register src/index.ts"
   },
   "watch": ["src/"],
-  "ext": "js,json,ts,graphql"
+  "ext": "js,json,ts,graphql,.env"
 }

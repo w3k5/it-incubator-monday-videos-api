@@ -1,6 +1,7 @@
 import { Request, Response } from 'express';
 import { HttpStatusesEnum } from '../../enums';
 import { videosRepository } from '../../repositories/videos-repository';
+import { validationResult } from 'express-validator';
 
 /**
  * Returns all videos from database
@@ -30,7 +31,11 @@ export const createVideo = (request: Request, response: Response) => {
 export const getVideoById = (request: Request, response: Response) => {
 	const id = +request.params.id;
 	const candidate = videosRepository.findVideoById(id);
-	return response.send(candidate);
+	if (candidate) {
+		return response.send(candidate);
+	} else {
+		return response.status(404).send();
+	}
 };
 
 /**
@@ -41,7 +46,11 @@ export const getVideoById = (request: Request, response: Response) => {
 export const updateVideoById = (request: Request, response: Response) => {
 	const id = +request.params.id;
 	const isVideoUpdated = videosRepository.updateVideoById(id, request.body);
-	return response.status(isVideoUpdated ? HttpStatusesEnum.NO_CONTENT : HttpStatusesEnum.NOT_FOUND).send();
+	return response
+		.status(
+			isVideoUpdated ? HttpStatusesEnum.NO_CONTENT : HttpStatusesEnum.NOT_FOUND,
+		)
+		.send();
 };
 
 /**
