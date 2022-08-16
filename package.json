@@ -4,7 +4,7 @@
   "main": "src/index.ts",
   "license": "MIT",
   "scripts": {
-    "dev": " yarn nodemon --inspect src/index.ts",
+    "dev": " yarn nodemon --inspect -r dotenv/config src/index.ts",
     "build": "tsc",
     "start": "node dist/index.js"
   },
