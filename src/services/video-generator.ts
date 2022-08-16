@@ -1,9 +1,9 @@
-import { ResolutionEnum } from "@enums";
-import { VideoInterface } from "@interfaces";
+import {VideoInterface} from "@interfaces";
+import {CreateVideoType} from "../types/create-video.type";
 
-export const videoGenerator = (title: string, author: string, availableResolutions: ResolutionEnum[]): VideoInterface => {
+export const videoGenerator = ({title, author, availableResolutions}: CreateVideoType): VideoInterface => {
     const date = new Date().toISOString();
-    const id = +(new Date())
+    const id = +(new Date());
     return {
         id,
         author,

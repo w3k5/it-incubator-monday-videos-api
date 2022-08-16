@@ -1,50 +1,7 @@
 import {Request, Response} from 'express';
-import {VideoInterface} from "@interfaces";
-import {ResolutionEnum, HttpStatusesEnum} from "../../enums";
-import {videoGenerator} from "./video-generator";
+import {HttpStatusesEnum} from "../../enums";
+import {videosRepository} from "../../repositories/videos-repository";
 
-export let MOCK_VIDEOS: VideoInterface[] = [
-    {
-        id: 1,
-        title: 'About JS - 01',
-        author: 'it-incubator.eu',
-        canBeDownloaded: true,
-        minAgeRestriction: 18,
-        createdAt: "2022-08-16T02:20:29.750Z",
-        publicationDate: "2022-08-16T02:20:29.750Z",
-        availableResolutions: [ResolutionEnum.P144, ResolutionEnum.P240]
-    },
-    {
-        id: 2,
-        title: 'About JS - 02',
-        author: 'it-incubator.eu',
-        canBeDownloaded: false,
-        minAgeRestriction: 6,
-        createdAt: "2022-08-16T02:20:29.750Z",
-        publicationDate: "2022-08-16T02:20:29.750Z",
-        availableResolutions: [ResolutionEnum.P144, ResolutionEnum.P240, ResolutionEnum.P360, ResolutionEnum.P480]
-    },
-    {
-        id: 3,
-        title: 'About JS - 03',
-        author: 'it-incubator.eu',
-        canBeDownloaded: true,
-        minAgeRestriction: 12,
-        createdAt: "2022-08-16T02:20:29.750Z",
-        publicationDate: "2022-08-16T02:20:29.750Z",
-        availableResolutions: [ResolutionEnum.P144, ResolutionEnum.P240, ResolutionEnum.P720, ResolutionEnum.P1080]
-    },
-    {
-        id: 4,
-        title: 'About JS - 04',
-        author: 'it-incubator.eu',
-        canBeDownloaded: true,
-        minAgeRestriction: 0,
-        createdAt: "2022-08-16T02:20:29.750Z",
-        publicationDate: "2022-08-16T02:20:29.750Z",
-        availableResolutions: [ResolutionEnum.P144, ResolutionEnum.P240, ResolutionEnum.P1080, ResolutionEnum.P2160]
-    },
-]
 
 /**
  * Returns all videos from database
@@ -52,7 +9,8 @@ export let MOCK_VIDEOS: VideoInterface[] = [
  * @param response
  */
 export const getAllVideos = (request: Request, response: Response) => {
-    return response.send(MOCK_VIDEOS);
+    const videos = videosRepository.findVideos();
+    return response.send(videos);
 }
 
 /**
@@ -61,9 +19,7 @@ export const getAllVideos = (request: Request, response: Response) => {
  * @param response
  */
 export const createVideo = (request: Request, response: Response) => {
-    const {title, author, availableResolutions} = request.body;
-    const newVideo = videoGenerator(title, author, availableResolutions);
-    MOCK_VIDEOS = [...MOCK_VIDEOS, newVideo];
+    const newVideo = videosRepository.createVideo(request.body);
     return response.send(newVideo);
 }
 
@@ -74,7 +30,7 @@ export const createVideo = (request: Request, response: Response) => {
  */
 export const getVideoById = (request: Request, response: Response) => {
     const id = +request.params.id;
-    const candidate = getOneVideoFromDatabaseById(id);
+    const candidate = videosRepository.findVideoById(id);
     return response.send(candidate);
 }
 
@@ -84,6 +40,9 @@ export const getVideoById = (request: Request, response: Response) => {
  * @param response
  */
 export const updateVideoById = (request: Request, response: Response) => {
+    const id = +request.params.id;
+    const isVideoUpdated = videosRepository.updateVideoById(id, request.body);
+    return response.status(isVideoUpdated ? HttpStatusesEnum.NO_CONTENT : HttpStatusesEnum.NOT_FOUND).send();
 }
 
 /**
@@ -93,17 +52,13 @@ export const updateVideoById = (request: Request, response: Response) => {
  */
 export const removeVideoById = (request: Request, response: Response) => {
     const id = +request.params.id;
-    const candidate = getOneVideoFromDatabaseById(id);
+    const candidate = videosRepository.findVideoById(id);
 
     if (!candidate) {
         return response.status(HttpStatusesEnum.NOT_FOUND).send();
     }
 
-    MOCK_VIDEOS = MOCK_VIDEOS.filter((video) => video.id !== id);
-    return response.status(HttpStatusesEnum.NO_CONTENT).send();
-}
+    videosRepository.removeVideoById(id);
 
-export const getOneVideoFromDatabaseById = (id: number): VideoInterface | null => {
-    const candidate = MOCK_VIDEOS.find((video) => video.id === id);
-    return candidate || null;
+    return response.status(HttpStatusesEnum.NO_CONTENT).send();
 }

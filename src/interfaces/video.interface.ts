@@ -1,4 +1,4 @@
-import { ResolutionEnum } from "@enums";
+import {ResolutionEnum} from "../enums";
 
 export interface VideoInterface {
     id: number;
