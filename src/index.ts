@@ -6,7 +6,7 @@ import { getAllVideos, createVideo, getVideoById, removeVideoById, updateVideoBy
 require('dotenv').config();
 const app = express();
 const port = process.env.PORT || 3000;
-const GLOBAL_PREFIX = '/lesson_01/api/videos';
+const GLOBAL_PREFIX = '/api/videos';
 
 app.use(cors());
 app.use(bodyParser.json());
