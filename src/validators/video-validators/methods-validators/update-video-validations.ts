@@ -10,12 +10,14 @@ import { checkParam } from '../param-validatiors/param-validation';
 /**
  * Update video validators
  */
+const [titleStringValidator, titleLengthValidator] = titleValidators;
+const [authorStringValidator, authorLengthValidator] = authorValidators;
 export const updateVideoValidation = [
 	checkParam,
-	titleValidators.titleStringValidation.optional({ nullable: true }),
-	titleValidators.titleLengthValidation.optional({ nullable: true }),
-	authorValidators.authorStringValidation.optional({ nullable: true }),
-	authorValidators.authorLengthValidation.optional({ nullable: true }),
+	titleStringValidator.optional({ nullable: true }),
+	titleLengthValidator.optional({ nullable: true }),
+	authorStringValidator.optional({ nullable: true }),
+	authorLengthValidator.optional({ nullable: true }),
 	resolutionValidations.optional(),
 	...canBeDownloadValidators,
 	...minAgeRestrictionValidators,

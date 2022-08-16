@@ -1,5 +1,4 @@
 import { VideoInterface } from '@interfaces';
-import { ResolutionEnum } from '../enums';
 import { videoGenerator } from '../services/video-generator';
 import { CreateVideoType, UpdateVideoType } from '@types';
 

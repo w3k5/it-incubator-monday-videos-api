@@ -7,10 +7,8 @@ import { resolutionValidations } from '../field-validators/resolution-validation
  * Create video validators
  */
 export const createVideoValidations = [
-	titleValidators.titleStringValidation,
-	titleValidators.titleLengthValidation,
-	authorValidators.authorStringValidation,
-	authorValidators.authorLengthValidation,
+	...titleValidators,
+	...authorValidators,
 	resolutionValidations,
 	inputValidationMiddleware,
 ];

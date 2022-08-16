@@ -1,4 +1,4 @@
-import { body } from 'express-validator';
+import { body, CustomValidator } from 'express-validator';
 import { customStringValidator } from '../../custom-validators/is-string-validator';
 
 const max = 20;
@@ -9,7 +9,6 @@ const max = 20;
 const authorStringValidation = body('author')
 	.trim()
 	.custom((value) => customStringValidator(value, 'Author'))
-	.isString()
 	.withMessage('Author must be a string!');
 
 const authorLengthValidation = body('author')
@@ -17,7 +16,7 @@ const authorLengthValidation = body('author')
 	.isLength({ max })
 	.withMessage(`Max length of author: ${max} symbols!`);
 
-export const authorValidators = {
+export const authorValidators = [
 	authorStringValidation,
 	authorLengthValidation,
-};
+];

@@ -30,8 +30,8 @@
     // "moduleResolution": "node",                       /* Specify how TypeScript looks up a file from a given module specifier. */
      "baseUrl": "./",                                  /* Specify the base directory to resolve non-relative module names. */
      "paths": {
-       "@enums": ["./src/enums/index.ts"],
        "@interfaces": ["./src/interfaces/index.ts"],
+       "@enums": ["./src/enums/index.ts"],
        "@types": ["./src/types/index.ts"],
        "@repositories/*": ["./src/repositories/*.ts"]
      },                                      /* Specify a set of entries that re-map imports to additional lookup locations. */

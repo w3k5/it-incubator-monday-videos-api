@@ -18,7 +18,4 @@ const titleLengthValidation = body('title')
 	.isLength({ max })
 	.withMessage(`Max length of title: ${max} symbols!`);
 
-export const titleValidators = {
-	titleStringValidation,
-	titleLengthValidation,
-};
+export const titleValidators = [titleStringValidation, titleLengthValidation];
