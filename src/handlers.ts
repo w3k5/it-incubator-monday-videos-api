@@ -62,8 +62,7 @@ export const getAllVideos = (request: Request, response: Response) => {
  */
 export const createVideo = (request: Request, response: Response) => {
     const {title, author, availableResolutions} = request.body;
-    const id = MOCK_VIDEOS.length + 1;
-    const newVideo = videoGenerator(id, title, author, availableResolutions);
+    const newVideo = videoGenerator(title, author, availableResolutions);
     MOCK_VIDEOS = [...MOCK_VIDEOS, newVideo];
     return response.send(newVideo);
 }

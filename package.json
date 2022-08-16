@@ -5,7 +5,8 @@
   "license": "MIT",
   "scripts": {
     "dev": " yarn nodemon --inspect src/index.ts",
-    "build": "tsc"
+    "build": "tsc",
+    "start": "node dist/index.js"
   },
   "dependencies": {
     "body-parser": "^1.20.0",
