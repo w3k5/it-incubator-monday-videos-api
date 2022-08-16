@@ -1,7 +1,7 @@
 import {Request, Response} from 'express';
 import {VideoInterface} from "@interfaces";
-import {ResolutionEnum, HttpStatusesEnum} from "./enums";
-import {videoGenerator} from "./services/video-generator";
+import {ResolutionEnum, HttpStatusesEnum} from "../../enums";
+import {videoGenerator} from "./video-generator";
 
 export let MOCK_VIDEOS: VideoInterface[] = [
     {
