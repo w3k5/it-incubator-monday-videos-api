@@ -11,7 +11,7 @@ const port = process.env.PORT || 3000;
 app.use(cors());
 app.use(bodyParser.json());
 
-app.use('/api/videos', videosRouter);
+app.use('/videos', videosRouter);
 
 app.listen(port, () => {
 	console.log(`IT-Incubator Video Api has been started at port: ${port}`);
