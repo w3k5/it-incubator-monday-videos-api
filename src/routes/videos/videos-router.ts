@@ -1,4 +1,4 @@
-import { NextFunction, Request, Response, Router } from 'express';
+import { Router } from 'express';
 import {
 	createVideo,
 	dropDatabase,
@@ -7,8 +7,10 @@ import {
 	removeVideoById,
 	updateVideoById,
 } from './handlers';
-import { createVideoValidations } from '../../validators/video-validators/methods-validators/create-video-validations';
-import { updateVideoValidation } from '../../validators/video-validators/methods-validators/update-video-validations';
+import {
+	createVideosValidators,
+	updateVideosValidators,
+} from '../../validators/video-validators/create.validator';
 
 export const videosRouter = Router();
 
@@ -20,7 +22,7 @@ videosRouter.get('/', getAllVideos);
 /**
  * Creates new video
  */
-videosRouter.post('/', createVideoValidations, createVideo);
+videosRouter.post('/', createVideosValidators, createVideo);
 
 /**
  * Returns one video by ID
@@ -30,7 +32,7 @@ videosRouter.get('/:id', getVideoById);
 /**
  * Updates one video by ID
  */
-videosRouter.put('/:id', updateVideoValidation, updateVideoById);
+videosRouter.put('/:id', updateVideosValidators, updateVideoById);
 
 /**
  * Drops full database

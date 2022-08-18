@@ -1,15 +1,17 @@
 import { Request, Response } from 'express';
 import { HttpStatusesEnum } from '../../enums';
-import { videosRepository } from '../../repositories/videos-repository';
-import { validationResult } from 'express-validator';
+import { Repository } from '../../repositories/repository';
+import { VideoInterface } from '@interfaces';
+
+const videosRepository = new Repository<VideoInterface>([]);
 
 /**
  * Returns all videos from database
  * @param request
  * @param response
  */
-export const getAllVideos = (request: Request, response: Response) => {
-	const videos = videosRepository.findVideos();
+export const getAllVideos = async (request: Request, response: Response) => {
+	const videos = await videosRepository.getAll();
 	return response.status(HttpStatusesEnum.OK).send(videos);
 };
 
@@ -18,8 +20,11 @@ export const getAllVideos = (request: Request, response: Response) => {
  * @param request
  * @param response
  */
-export const createVideo = (request: Request, response: Response) => {
-	const newVideo = videosRepository.createVideo(request.body);
+export const createVideo = async (request: Request, response: Response) => {
+	const {
+		body: { title, author = '' },
+	} = request;
+	const newVideo = await videosRepository.create({ title, author });
 	return response.status(HttpStatusesEnum.CREATED).send(newVideo);
 };
 
@@ -28,9 +33,9 @@ export const createVideo = (request: Request, response: Response) => {
  * @param request
  * @param response
  */
-export const getVideoById = (request: Request, response: Response) => {
+export const getVideoById = async (request: Request, response: Response) => {
 	const id = +request.params.id;
-	const candidate = videosRepository.findVideoById(id);
+	const candidate = await videosRepository.getById(id);
 	if (candidate) {
 		return response.status(HttpStatusesEnum.OK).send(candidate);
 	} else {
@@ -43,9 +48,9 @@ export const getVideoById = (request: Request, response: Response) => {
  * @param request
  * @param response
  */
-export const updateVideoById = (request: Request, response: Response) => {
+export const updateVideoById = async (request: Request, response: Response) => {
 	const id = +request.params.id;
-	const isVideoUpdated = videosRepository.updateVideoById(id, request.body);
+	const isVideoUpdated = await videosRepository.update(id, request.body);
 	return response
 		.status(
 			isVideoUpdated ? HttpStatusesEnum.NO_CONTENT : HttpStatusesEnum.NOT_FOUND,
@@ -58,15 +63,15 @@ export const updateVideoById = (request: Request, response: Response) => {
  * @param request
  * @param response
  */
-export const removeVideoById = (request: Request, response: Response) => {
+export const removeVideoById = async (request: Request, response: Response) => {
 	const id = +request.params.id;
-	const candidate = videosRepository.findVideoById(id);
+	const candidate = await videosRepository.getById(id);
 
 	if (!candidate) {
 		return response.status(HttpStatusesEnum.NOT_FOUND).send();
 	}
 
-	videosRepository.removeVideoById(id);
+	await videosRepository.removeById(id);
 
 	return response.status(HttpStatusesEnum.NO_CONTENT).send();
 };
@@ -76,7 +81,7 @@ export const removeVideoById = (request: Request, response: Response) => {
  * @param request
  * @param response
  */
-export const dropDatabase = (request: Request, response: Response) => {
-	videosRepository.dropDatabase();
+export const dropDatabase = async (request: Request, response: Response) => {
+	await videosRepository.drop();
 	return response.status(HttpStatusesEnum.NO_CONTENT).send();
 };
