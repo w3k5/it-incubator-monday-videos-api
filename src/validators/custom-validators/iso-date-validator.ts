@@ -1,7 +1,7 @@
 import { CustomValidator } from 'express-validator';
 
 export const customIsoDateValidator: CustomValidator = (value: string) => {
-	if (value.length !== 12) {
+	if (value.length !== 24) {
 		throw new Error('Invalid date format');
 	}
 	const parsedDate = new Date(value).valueOf();
