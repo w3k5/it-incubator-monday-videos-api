@@ -1,18 +1,15 @@
-import { inputValidationMiddleware } from '../../../middlewares/input-validation.middleware';
-import { titleStringValidation } from '../field-validators/title-validations';
-import { authorStringValidation } from '../field-validators/author-validations';
-import { resolutionValidations } from '../field-validators/resolution-validations';
 import { body } from 'express-validator';
-import { requiredValidator } from '../../custom-validators/required-validator';
+import { authorValidator } from './author-validator';
+import { inputValidationMiddleware } from '../../../middlewares/input-validation.middleware';
 
-/**
- * Create video validators
- */
-export const createVideoValidations = [
-	titleStringValidation,
-	body('title').custom(requiredValidator),
-	authorStringValidation,
-	body('author'),
-	// resolutionValidations,
+export const createVideosValidators = [
+	titleValidator(body('title')),
+	authorValidator(body('author')).optional(),
+	inputValidationMiddleware,
+];
+
+export const updateVideosValidators = [
+	titleValidator(body('title')).optional(),
+	authorValidator(body('author')).optional(),
 	inputValidationMiddleware,
 ];
