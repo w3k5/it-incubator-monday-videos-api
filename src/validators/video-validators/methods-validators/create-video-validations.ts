@@ -12,7 +12,7 @@ export const createVideoValidations = [
 	titleStringValidation,
 	body('title').custom(requiredValidator),
 	authorStringValidation,
-	body('author').custom(requiredValidator),
+	body('author'),
 	resolutionValidations,
 	inputValidationMiddleware,
 ];
