@@ -1,6 +1,7 @@
 import { body } from 'express-validator';
 import { authorValidator } from './author-validator';
 import { inputValidationMiddleware } from '../../../middlewares/input-validation.middleware';
+import { titleValidator } from './title-validator';
 
 export const createVideosValidators = [
 	titleValidator(body('title')),
