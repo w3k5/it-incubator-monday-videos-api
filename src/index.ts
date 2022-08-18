@@ -3,7 +3,7 @@ import cors from 'cors';
 import bodyParser from 'body-parser';
 import { config } from 'dotenv';
 import { videosRouter } from './routes/videos/videos-router';
-import { Repository } from '@repositories/repository';
+import { Repository } from './repositories/repository';
 import { VideoInterface } from '@interfaces';
 import { testingRouter } from './routes/testing/testing-router';
 
