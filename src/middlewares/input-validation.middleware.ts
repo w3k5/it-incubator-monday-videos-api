@@ -11,7 +11,7 @@ export const inputValidationMiddleware = (
 	const errors = validationResult(request);
 	if (!errors.isEmpty()) {
 		const preparedErrors = {
-			errorMessages: errors.array().map(generateError),
+			errorsMessages: errors.array().map(generateError),
 		};
 		return response.status(HttpStatusesEnum.BAD_REQUEST).send(preparedErrors);
 	}
