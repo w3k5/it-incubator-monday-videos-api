@@ -6,6 +6,7 @@ export const authorValidator = (chain: ValidationChain): ValidationChain => {
 		.isString()
 		.isLength({
 			min: 1,
+			max: 20,
 		})
-		.withMessage('Name length must be greater than 1');
+		.withMessage('Name length must be greater than 1 and less than 20');
 };

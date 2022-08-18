@@ -1,10 +1,8 @@
 import { Request, Response } from 'express';
-import { VideoInterface } from '@interfaces';
 import { HttpStatusesEnum } from '../../enums';
-import { Repository } from '../../repositories/repository';
 import { videoGenerator } from '../../services/video-generator';
+import { videosRepository } from '../../index';
 
-const videosRepository = new Repository<VideoInterface>([]);
 /**
  * Returns all videos from database
  * @param request
@@ -70,15 +68,5 @@ export const removeVideoById = async (request: Request, response: Response) => {
 
 	await videosRepository.removeById(id);
 
-	return response.status(HttpStatusesEnum.NO_CONTENT).send();
-};
-
-/**
- * Drops full database
- * @param request
- * @param response
- */
-export const dropDatabase = async (request: Request, response: Response) => {
-	await videosRepository.drop();
 	return response.status(HttpStatusesEnum.NO_CONTENT).send();
 };

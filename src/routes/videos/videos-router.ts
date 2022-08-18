@@ -1,7 +1,6 @@
-import { NextFunction, Request, Response, Router } from 'express';
+import { Router } from 'express';
 import {
 	createVideo,
-	dropDatabase,
 	getAllVideos,
 	getVideoById,
 	removeVideoById,
@@ -33,11 +32,6 @@ videosRouter.get('/:id', getVideoById);
  * Updates one video by ID
  */
 videosRouter.put('/:id', updateVideosValidators, updateVideoById);
-
-/**
- * Drops full database
- */
-videosRouter.delete('/all-data', dropDatabase);
 
 /**
  * Removes one video by ID
