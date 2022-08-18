@@ -1,4 +1,4 @@
-import { Router } from 'express';
+import { NextFunction, Request, Response, Router } from 'express';
 import {
 	createVideo,
 	dropDatabase,
@@ -10,7 +10,7 @@ import {
 import {
 	createVideosValidators,
 	updateVideosValidators,
-} from '../../validators/video-validators/create.validator';
+} from '../../validators/video-validators/methods-validators/create-video-validations';
 
 export const videosRouter = Router();
 
@@ -37,7 +37,7 @@ videosRouter.put('/:id', updateVideosValidators, updateVideoById);
 /**
  * Drops full database
  */
-videosRouter.delete('/', dropDatabase);
+videosRouter.delete('/all-data', dropDatabase);
 
 /**
  * Removes one video by ID

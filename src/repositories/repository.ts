@@ -10,9 +10,6 @@ export class Repository<T extends { id: number }>
 		this.database = database;
 	}
 
-	/**
-	 * Finds all entities from Database
-	 */
 	async getAll() {
 		return this.database;
 	}
@@ -21,8 +18,8 @@ export class Repository<T extends { id: number }>
 	 * Creates new entity in database
 	 * @param data
 	 */
-	async create<T>(data: any) {
-		const entity = { id: idGenerator(), ...data };
+	async create(data: Omit<T, 'id'>) {
+		const entity: any = { id: idGenerator(), ...data };
 		this.database.push(entity);
 		return entity;
 	}
