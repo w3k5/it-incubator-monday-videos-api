@@ -14,9 +14,9 @@ export const updateVideoValidation = [
 	checkParam,
 	titleStringValidation.optional({ nullable: true }),
 	authorStringValidation.optional({ nullable: true }),
-	resolutionValidations.optional(),
-	...canBeDownloadValidators,
-	...minAgeRestrictionValidators,
-	...publicationDateValidators,
+	// resolutionValidations.optional(),
+	// ...canBeDownloadValidators,
+	// ...minAgeRestrictionValidators,
+	// ...publicationDateValidators,
 	inputValidationMiddleware,
 ];

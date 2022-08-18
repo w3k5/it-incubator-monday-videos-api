@@ -3,16 +3,16 @@ import { ResolutionEnum } from '../enums';
 export interface VideoInterface {
 	id: number;
 	title: string;
-	author: string;
-	canBeDownloaded: boolean;
-	minAgeRestriction: number;
+	author: string | null;
+	// canBeDownloaded: boolean;
+	// minAgeRestriction: number;
 	/**
 	 * ISO String
 	 */
-	createdAt: string;
+	// createdAt: string;
 	/**
 	 * ISO String
 	 */
-	publicationDate: string;
-	availableResolutions: ResolutionEnum[];
+	// publicationDate: string;
+	// availableResolutions: ResolutionEnum[];
 }
