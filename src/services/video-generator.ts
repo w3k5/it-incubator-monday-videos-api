@@ -4,8 +4,8 @@ import { CreateVideoType } from '../types/create-video.type';
 export const videoGenerator = ({
 	title,
 	author = '',
-}: // availableResolutions = [],
-CreateVideoType): VideoInterface => {
+	availableResolutions = [],
+}: CreateVideoType): VideoInterface => {
 	const date = new Date().toISOString();
 	const publicationDate = getDefaultPublicationDate(date);
 	const id = +new Date();
@@ -13,11 +13,11 @@ CreateVideoType): VideoInterface => {
 		id,
 		author,
 		title,
-		// availableResolutions,
-		// createdAt: date,
-		// publicationDate,
-		// canBeDownloaded: false,
-		// minAgeRestriction: 18,
+		availableResolutions,
+		createdAt: date,
+		publicationDate,
+		canBeDownloaded: false,
+		minAgeRestriction: null,
 	};
 };
 

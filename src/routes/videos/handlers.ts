@@ -2,6 +2,7 @@ import { Request, Response } from 'express';
 import { VideoInterface } from '@interfaces';
 import { HttpStatusesEnum } from '../../enums';
 import { Repository } from '../../repositories/repository';
+import { videoGenerator } from '../../services/video-generator';
 
 const videosRepository = new Repository<VideoInterface>([]);
 /**
@@ -20,7 +21,7 @@ export const getAllVideos = async (request: Request, response: Response) => {
  * @param response
  */
 export const createVideo = async (request: Request, response: Response) => {
-	const newVideo = await videosRepository.create(request.body);
+	const newVideo = await videosRepository.create(videoGenerator(request.body));
 	return response.status(HttpStatusesEnum.CREATED).send(newVideo);
 };
 

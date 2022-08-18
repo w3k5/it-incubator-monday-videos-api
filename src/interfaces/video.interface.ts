@@ -4,15 +4,15 @@ export interface VideoInterface {
 	id: number;
 	title: string;
 	author: string;
-	// canBeDownloaded: boolean;
-	// minAgeRestriction: number;
+	canBeDownloaded: boolean;
+	minAgeRestriction: number | null;
 	/**
 	 * ISO String
 	 */
-	// createdAt: string;
+	createdAt: string;
 	/**
 	 * ISO String
 	 */
-	// publicationDate: string;
-	// availableResolutions: ResolutionEnum[];
+	publicationDate: string;
+	availableResolutions: ResolutionEnum[];
 }
